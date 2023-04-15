@@ -2,6 +2,8 @@ package com.jpa_project.model;
 
 import java.util.List;
 
+import com.github.javafaker.FunnyName;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class Utente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String username;
 	private String nome;
 	private String cognome;
 	private String email;

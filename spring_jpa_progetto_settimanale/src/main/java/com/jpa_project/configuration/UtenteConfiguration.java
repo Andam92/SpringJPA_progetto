@@ -17,6 +17,7 @@ public class UtenteConfiguration {
 	public Utente nuovoUtente() {
 		Utente u = new Utente();
 		Faker fake = Faker.instance(new Locale("it-IT"));
+		u.setUsername(fake.funnyName().name());
 		u.setNome(fake.name().firstName());
 		u.setCognome(fake.name().lastName());
 		u.setEmail(u.getNome().toLowerCase() + "." + u.getCognome().toLowerCase() + "@ex.com");

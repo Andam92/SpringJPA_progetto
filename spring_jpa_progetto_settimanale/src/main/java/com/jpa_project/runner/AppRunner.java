@@ -1,6 +1,8 @@
 package com.jpa_project.runner;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.jpa_project.model.Edificio;
 import com.jpa_project.model.Postazione;
+import com.jpa_project.model.Prenotazione;
 import com.jpa_project.model.Tipo;
 import com.jpa_project.model.Utente;
 import com.jpa_project.service.EdificioService;
@@ -30,26 +33,33 @@ public class AppRunner implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("Run...");
-//		Edificio e = new Edificio();
-		
-//		Postazione p = new Postazione("Ciao", Tipo.OPENSPACE, e);
 
-//		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");
+		// EDIFICI
+		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");		
+		edificioService.inserisciEdificio(e1);
+		Edificio edificioLetto = edificioService.cercaEdificio(1l);
+//		edificioService.eliminaEdificio(edificioLetto);
+//		System.out.println(edificioLetto);
 		
-//		edificioService.inserisciEdificio(e1);
-//		Edificio e2 = edificioService.cercaEdificio(1l);
-//		System.out.println(e1);
-//		postazioneService.creaPostazione("Milano", e2, Tipo.PRIVATO);
+		// POSTAZIONI
+//		Postazione p1 = (Postazione) appContext.getBean("creaPostazione");
+		postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
 		
 		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
+		System.out.println(postazioneLetta);
 		
-		//utenteService.creaUtente();
+		// UTENTI
+		utenteService.creaUtente();
 		
 		Utente utenteLetto = utenteService.getUtenteById(1l);
 		
 	//	System.out.println(utenteLetto);
 		
-		prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now(), utenteLetto);
+		// PRENOTAZIONI
+			prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(4), utenteLetto);
+		
+//		List<Prenotazione> prenot = prenotazioneService.ottieniPrenotazioni(LocalDate.of(2023, 04, 20), postazioneLetta);
+//		System.out.println(prenot);
 	}
 
 }

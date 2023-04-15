@@ -19,29 +19,17 @@ public class PostazioneService {
 
 	@Autowired private PostazioneDaoRepository repo;
 	
-	
-	
-//	public void creaPostazioneDb() {
-//	
-//	}
-	
 	public void creaPostazione(String desc, Edificio e, Tipo t) {
-//		Postazione p = new Postazione(desc, t, e);
-		 AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(PostazioneConfiguration.class);
-		Postazione p = (Postazione) appContext.getBean("creaPostazione");
-//		Edificio e = new Edificio();
-//		e.setCitta("Roma");
-//		e.setIndirizzo("Roma");
-//		e.setNome("Romapalace");
-//		Postazione p = creaPostazioneProvider.getObject();
+
+	 AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(PostazioneConfiguration.class);
+	 Postazione p = (Postazione) appContext.getBean("creaPostazione");
+
 		p.setDescrizione(desc);
 		p.setEdificio(e);
 		p.setTipo(t);
 		p.creaOccupanti(p);
-		
-		System.out.println("prima");
 		inserisciPostazione(p);
-		System.out.println("dopo");
+
 	}
 	
 	public void inserisciPostazione(Postazione p) {

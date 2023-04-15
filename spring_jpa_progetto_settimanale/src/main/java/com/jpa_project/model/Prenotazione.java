@@ -23,6 +23,7 @@ public class Prenotazione {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDate dataPrenotazione;
+	private LocalDate scadenzaPrenotazione;
 	@ManyToOne
 	private Utente utente;
 	@ManyToOne

@@ -22,4 +22,7 @@ public class EdificioService {
         return repo.findById(id).get();
     }
 	
+	public void eliminaEdificio(Edificio e) {
+		repo.delete(e);
+	}
 }

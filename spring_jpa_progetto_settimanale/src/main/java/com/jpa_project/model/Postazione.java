@@ -2,6 +2,7 @@ package com.jpa_project.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -43,19 +44,27 @@ public class Postazione {
 	public void creaOccupanti(Postazione p) {
 		switch(p.getTipo()) {
 		case PRIVATO:
-			p.setMaxOccupanti(120);;
+			p.setMaxOccupanti(5);;
 			break;
 		
 		case OPENSPACE:
-			p.setMaxOccupanti(200);
+			p.setMaxOccupanti(100);
 			break;
 		
 		case SALA_RIUNIONI:
-			p.setMaxOccupanti(60);
+			p.setMaxOccupanti(20);
 			break;
 		
 		default:
 			break;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Postazione [id=" + id + ", descrizione=" + descrizione + ", tipo=" + tipo + ", maxOccupanti="
+				+ maxOccupanti + ", edificio=" + edificio + "]";
+	}
+	
+	
 }
