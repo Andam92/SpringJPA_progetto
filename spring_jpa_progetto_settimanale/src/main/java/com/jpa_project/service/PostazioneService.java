@@ -51,4 +51,8 @@ public class PostazioneService {
 	public List<Postazione> cercaTuttePostazioni(){
 		return (List<Postazione>) repo.findAll();
 	}
+	
+	public List<Postazione> cercaPostazioniByTipoAndCitta(Tipo tipo, String citta){
+		return repo.cercaPostazioniByTipoAndCitta(tipo, citta);
+	}
 }

@@ -36,20 +36,20 @@ public class AppRunner implements CommandLineRunner{
 
 		// EDIFICI
 		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");		
-		edificioService.inserisciEdificio(e1);
+//		edificioService.inserisciEdificio(e1);
 		Edificio edificioLetto = edificioService.cercaEdificio(1l);
 //		edificioService.eliminaEdificio(edificioLetto);
 //		System.out.println(edificioLetto);
 		
 		// POSTAZIONI
 //		Postazione p1 = (Postazione) appContext.getBean("creaPostazione");
-		postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
+//		postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
 		
 		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
-		System.out.println(postazioneLetta);
+//		System.out.println(postazioneLetta);
 		
 		// UTENTI
-		utenteService.creaUtente();
+//		utenteService.creaUtente();
 		
 		Utente utenteLetto = utenteService.getUtenteById(1l);
 		
@@ -60,6 +60,11 @@ public class AppRunner implements CommandLineRunner{
 		
 //		List<Prenotazione> prenot = prenotazioneService.ottieniPrenotazioni(LocalDate.of(2023, 04, 20), postazioneLetta);
 //		System.out.println(prenot);
+			
+			// CERCA POSTAZIONI
+			List <Postazione> listaPostazioniCercate = postazioneService.cercaPostazioniByTipoAndCitta(Tipo.OPENSPACE, "Piras umbro");
+			listaPostazioniCercate.forEach(p -> System.out.println(p));
+			System.out.println(listaPostazioniCercate.size());
 	}
 
 }

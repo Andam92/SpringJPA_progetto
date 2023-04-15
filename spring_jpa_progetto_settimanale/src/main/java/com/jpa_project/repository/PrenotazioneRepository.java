@@ -17,4 +17,5 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
             + " AND p.postazionePrenotata = :postazione")
     List<Prenotazione> checkPrenotazione(LocalDate data, Postazione postazione);
 	
+	
 }
