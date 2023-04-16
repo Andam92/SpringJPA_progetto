@@ -34,37 +34,45 @@ public class AppRunner implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		System.out.println("Run...");
 
-		// EDIFICI
-		Edificio e1 = (Edificio) appContext.getBean("nuovoEdificio");		
-//		edificioService.inserisciEdificio(e1);
-		Edificio edificioLetto = edificioService.cercaEdificio(1l);
-//		edificioService.eliminaEdificio(edificioLetto);
+		
+		// EDIFICI		
+//		edificioService.creaEdificio();
+		Edificio edificioLetto = edificioService.cercaEdificioById(1l);
+		Edificio ultimoEdificio = edificioService.trovaUltimoEdificio();
+//		edificioService.eliminaEdificio(edificioLetto); //prova elimina
 //		System.out.println(edificioLetto);
+//		ultimoEdificio.setNome("Prova update!");
+//		edificioService.updateEdificio(edificioLetto);
 		
-		// POSTAZIONI
-//		Postazione p1 = (Postazione) appContext.getBean("creaPostazione");
-//		postazioneService.creaPostazione("prova postazione", edificioLetto, Tipo.OPENSPACE);
 		
-		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
+		// POSTAZIONI				
+//		postazioneService.creaPostazione("un'altra postazione", edificioLetto, Tipo.PRIVATO);
+		
+//		Postazione postazioneLetta = postazioneService.getPostazioneById(1l);
 //		System.out.println(postazioneLetta);
 		
-		// UTENTI
-//		utenteService.creaUtente();
 		
+		// UTENTI		
+//		utenteService.creaUtente();		
 		Utente utenteLetto = utenteService.getUtenteById(1l);
 		
 	//	System.out.println(utenteLetto);
 		
+		
 		// PRENOTAZIONI
-			prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(4), utenteLetto);
+//			prenotazioneService.creaPrenotazione(postazioneLetta, LocalDate.now().plusMonths(5), utenteLetto);
 		
 //		List<Prenotazione> prenot = prenotazioneService.ottieniPrenotazioni(LocalDate.of(2023, 04, 20), postazioneLetta);
 //		System.out.println(prenot);
 			
-			// CERCA POSTAZIONI
-			List <Postazione> listaPostazioniCercate = postazioneService.cercaPostazioniByTipoAndCitta(Tipo.OPENSPACE, "Piras umbro");
-			listaPostazioniCercate.forEach(p -> System.out.println(p));
-			System.out.println(listaPostazioniCercate.size());
+		
+			// CERCA POSTAZIONI PER TIPO E CITTA'
+//			List <Postazione> listaPostazioniCercate = postazioneService.cercaPostazioniByTipoAndCitta(Tipo.OPENSPACE, "Piras umbro");
+//			listaPostazioniCercate.forEach(p -> System.out.println(p));
+//			System.out.println(listaPostazioniCercate.size());
+		
+		
+		
 	}
 
 }

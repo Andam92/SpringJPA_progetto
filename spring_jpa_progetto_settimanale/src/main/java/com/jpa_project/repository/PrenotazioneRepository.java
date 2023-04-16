@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jpa_project.model.Postazione;
 import com.jpa_project.model.Prenotazione;
+import com.jpa_project.model.Utente;
 
 @Repository
 public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Long>{
@@ -17,5 +18,7 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
             + " AND p.postazionePrenotata = :postazione")
     List<Prenotazione> checkPrenotazione(LocalDate data, Postazione postazione);
 	
+	@Query(value = "SELECT p FROM Prenotazione p WHERE p.utente = :u AND p.dataPrenotazione = :data")
+	List<Prenotazione> checkPrenotazioniUtenteData(Utente u, LocalDate data);
 	
 }

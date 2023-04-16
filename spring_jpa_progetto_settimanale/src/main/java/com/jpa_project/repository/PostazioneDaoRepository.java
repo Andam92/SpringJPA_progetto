@@ -19,4 +19,5 @@ public interface PostazioneDaoRepository extends JpaRepository<Postazione, Long>
 	
 	@Query(value = "SELECT p FROM Postazione p WHERE p.tipo = :tipo AND p.edificio.citta = :citta")
 	List<Postazione> cercaPostazioniByTipoAndCitta(Tipo tipo, String citta);
+	
 }

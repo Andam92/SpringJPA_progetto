@@ -29,6 +29,8 @@ public class PostazioneService {
 		p.setTipo(t);
 		p.creaOccupanti(p);
 		inserisciPostazione(p);
+		
+		System.out.println("La postazione " + p.getDescrizione() + " (" + p.getTipo() + ", " + p.getEdificio().getNome() + ") " + "è stata inserita nel DB");
 
 	}
 	
@@ -41,18 +43,35 @@ public class PostazioneService {
 	}
 	
 	public Postazione getPostazioneById(Long id) {
-		return repo.findById(id).get();
+		Postazione p = repo.findById(id).get();
+		System.out.println("La postazione cercata è nella città " + p.getEdificio().getCitta() + ", di tipo " + p.getTipo());
+		return p;
+
 	}
 	
-	public void updatePostazione(Postazione p) {
-		repo.save(p);
+	public Postazione updatePostazione(Postazione p) {
+		Postazione updatedP = repo.save(p);
+		System.out.println("la postazione " + updatedP.getId() + " è stata correttamente aggiornata");
+		return updatedP;
+	}
+	
+	public void eliminaPostazione(Postazione p) {
+		repo.delete(p);
+		System.out.println("La postazione " + p.toString() + " è stata eliminata dal DB");
 	}
 	
 	public List<Postazione> cercaTuttePostazioni(){
-		return (List<Postazione>) repo.findAll();
+		 List<Postazione> lista = repo.findAll();
+		 System.out.println("Lista di postazioni:");
+			lista.forEach(p -> System.out.println(p.toString()));
+
+		 return lista;
 	}
 	
-	public List<Postazione> cercaPostazioniByTipoAndCitta(Tipo tipo, String citta){
-		return repo.cercaPostazioniByTipoAndCitta(tipo, citta);
+	public List<Postazione> cercaPostazioniByTipoAndCitta(Tipo tipo, String citta, Postazione p){
+		List<Postazione> lista = repo.cercaPostazioniByTipoAndCitta(tipo, citta);
+		System.out.println("Lista di postazioni di tipo " + p.getTipo() + "nella città " + citta);
+		lista.forEach(postazione -> System.out.println(postazione.toString()));
+		return lista;
 	}
 }

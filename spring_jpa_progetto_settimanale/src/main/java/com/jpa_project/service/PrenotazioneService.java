@@ -23,8 +23,9 @@ public class PrenotazioneService {
 	public void creaPrenotazione(Postazione postazione, LocalDate data, Utente u) {
 		
 		List<Prenotazione> listaPrenotazioni = ottieniPrenotazioni(data, postazione);
+		List<Prenotazione> listaPrenotazioniPerData = cercaPrenotazioniUtenteData(u, data);
 		
-		if(listaPrenotazioni.size() == 0) {
+		if(listaPrenotazioni.size() == 0 && listaPrenotazioniPerData.size() == 0) {
 		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(PrenotazioneConfiguration.class);
 		
 		Prenotazione p = (Prenotazione) appContext.getBean("nuovaPrenotazione");
@@ -34,8 +35,10 @@ public class PrenotazioneService {
 		p.setScadenzaPrenotazione(data.plusDays(1)); 
 		salvaPrenotazione(p);
 		System.out.println("La postazione nell' " + postazione.getEdificio().getNome() + " è stata prenotata con successo!");
-		} else {
+		} else if(listaPrenotazioni.size() > 0 && listaPrenotazioniPerData.size() == 0) {
 			System.out.println("Risulta già una prenotazione per la data " + data);
+		} else {
+			System.out.println("L'utente " + u.getNome() + u.getCognome() + " ha già prenotato una postazione per quella data");
 		}
 	}
 		
@@ -50,5 +53,9 @@ public class PrenotazioneService {
 	
 	public List<Prenotazione> ottieniPrenotazioni(LocalDate data, Postazione postazione){
 		return repo.checkPrenotazione(data, postazione);
+	}
+	
+	public List<Prenotazione> cercaPrenotazioniUtenteData(Utente u, LocalDate data){
+		return repo.checkPrenotazioniUtenteData(u, data);
 	}
 }
